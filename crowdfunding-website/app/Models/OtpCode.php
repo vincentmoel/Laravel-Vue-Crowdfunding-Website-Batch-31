@@ -6,16 +6,13 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class User extends Model
+class OtpCode extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
     protected $keyType = 'string';
     public $incrementing = false;
-
-    protected $with = ['role'];
-    
 
     public static function boot()
     {
@@ -29,13 +26,8 @@ class User extends Model
         });
     }
 
-    public function role()
+    public function user()
     {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
-
-    public function otp_code()
-    {
-        return $this->hasOne(OtpCode::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 }

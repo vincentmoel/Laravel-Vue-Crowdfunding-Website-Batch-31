@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Models\OtpCode;
+use App\Http\Requests\StoreOtpCodeRequest;
+use App\Http\Requests\UpdateOtpCodeRequest;
 
-class UserController extends Controller
+class OtpCodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return "halo";
-    }
-    public function index2()
-    {
-        return "halo2";
+        //
     }
 
     /**
@@ -35,10 +31,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUserRequest  $request
+     * @param  \App\Http\Requests\StoreOtpCodeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreOtpCodeRequest $request)
     {
         //
     }
@@ -46,10 +42,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\OtpCode  $otpCode
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(OtpCode $otpCode)
     {
         //
     }
@@ -57,10 +53,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\OtpCode  $otpCode
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(OtpCode $otpCode)
     {
         //
     }
@@ -68,11 +64,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateUserRequest  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Http\Requests\UpdateOtpCodeRequest  $request
+     * @param  \App\Models\OtpCode  $otpCode
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateOtpCodeRequest $request, OtpCode $otpCode)
     {
         //
     }
@@ -80,10 +76,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\OtpCode  $otpCode
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(OtpCode $otpCode)
     {
         //
     }

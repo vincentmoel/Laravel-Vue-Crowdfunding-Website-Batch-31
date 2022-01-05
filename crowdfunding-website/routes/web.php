@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/route1',[UserController::class,'index'])->middleware('verified.email');
+Route::get('/route2',[UserController::class,'index2'])->middleware('admin.role','verified.email');
