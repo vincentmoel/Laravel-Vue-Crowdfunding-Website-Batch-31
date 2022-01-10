@@ -15,7 +15,7 @@ trait Uuid
         return 'string';
     }
 
-    protected static function bootUsesUuid()
+    protected static function bootUuid()
     {
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()}))

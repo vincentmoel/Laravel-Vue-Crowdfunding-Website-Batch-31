@@ -18,7 +18,9 @@ class AdminRole
     public function handle(Request $request, Closure $next)
     {
         $user = auth()->user();
-        // dd($user)
+
+        // dd($user->role_id);
+        // $user = User::first();
         if($user->role_id == $user->getAdminId())
         {
             return $next($request);

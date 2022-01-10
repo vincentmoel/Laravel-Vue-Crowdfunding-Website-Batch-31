@@ -2,32 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\Uuid;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuid;
 
     protected $guarded = [];
-    protected $keyType = 'string';
-    public $incrementing = false;
-
-    protected $with = ['role'];
     
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function($model){
-            if(empty($model->{$model->getKeyName()}))
-            {
-                $model->{$model->getKeyName()} = Str::uuid();
-            }
-        });
-    }
 
     public function role()
     {

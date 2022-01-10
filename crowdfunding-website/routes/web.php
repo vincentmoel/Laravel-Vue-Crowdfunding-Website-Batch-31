@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/route1',[UserController::class,'index'])->middleware('verified.email');
-Route::get('/route2',[UserController::class,'index2'])->middleware('admin.role','verified.email');
+Route::get('/route2',[UserController::class,'index2'])->middleware('admin.role');
