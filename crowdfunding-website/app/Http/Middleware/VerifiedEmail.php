@@ -17,10 +17,7 @@ class VerifiedEmail
      */
     public function handle(Request $request, Closure $next)
     {
-        // if(!is_null(auth()->user()->email_verified_at)){
-        //     return $next($request);
-        // }
-        if(!is_null(User::first()->value('email_verified_at'))){
+        if(!is_null(auth()->user()->email_verified_at)){
             return $next($request);
         }
         abort(403);

@@ -38,4 +38,11 @@ class User extends Model
     {
         return $this->hasOne(OtpCode::class);
     }
+
+    public function getAdminId()
+    {
+        $role = Role::where('name','admin')->first();
+
+        return $role->id;
+    }
 }
