@@ -21,11 +21,6 @@ class UserController extends Controller
         $get_request['password'] = bcrypt($request->password);
         $user = User::create($get_request);
 
-        // return response()->json([
-        //     'data'      => ,
-        //     'code'      => '00',
-        //     'message'   => 'success'
-        // ]);
 
         return new UserResource($user);
     }
