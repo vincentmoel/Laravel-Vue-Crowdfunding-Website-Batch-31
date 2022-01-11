@@ -1,0 +1,1 @@
+Halo {{ $user->name }}, kode OTP Anda adalah {{ $otp_code->otp }}

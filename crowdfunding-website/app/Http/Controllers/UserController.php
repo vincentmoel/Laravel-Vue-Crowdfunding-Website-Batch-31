@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OtpCodeEvent;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Models\OtpCode;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OtpCodeMail;
 
 class UserController extends Controller
 {
@@ -24,6 +28,7 @@ class UserController extends Controller
         
         $user = User::create($get_request);
 
+        event(new OtpCodeEvent($user,$user->otp_code));
 
         return response()->json([
             'data'      => [

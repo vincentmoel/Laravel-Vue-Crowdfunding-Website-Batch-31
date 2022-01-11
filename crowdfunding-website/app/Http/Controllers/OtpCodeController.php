@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\OtpCode;
+use App\Events\OtpCodeEvent;
 use Illuminate\Support\Carbon;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\StoreOtpCodeRequest;
@@ -16,6 +17,9 @@ class OtpCodeController extends Controller
     {
         $user = User::where('email',$request->email)->first();
         $user->generateOtpCode();
+
+        event(new OtpCodeEvent($user,$user->otp_code));
+
 
         return response()->json([
             'data'      => [
