@@ -2,85 +2,77 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\OtpCode;
+use Illuminate\Support\Carbon;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\StoreOtpCodeRequest;
 use App\Http\Requests\UpdateOtpCodeRequest;
+use App\Http\Requests\VerificationOtpCodeRequest;
 
 class OtpCodeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function update(UpdateOtpCodeRequest $request)
     {
-        //
+        $user = User::where('email',$request->email)->first();
+        $user->generateOtpCode();
+
+        return response()->json([
+            'data'      => [
+                                'user' => new UserResource($user),
+                            ],
+            'code'      => '200',
+            'status'    => 'success',
+            'message'   => 'Success Regenerate OTP Code'
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function verification(VerificationOtpCodeRequest $request)
     {
-        //
+        $otp_code = OtpCode::where('otp',$request->otp)
+                        ->where('user_id',auth()->user()->id)
+                        ->first();
+        if(!$otp_code)
+        {
+            return response()->json([
+                'code'      => '404',
+                'status'    => 'failed',
+                'message'   => 'OTP Code Not Found'
+            ]);
+        }
+
+        $time = Carbon::now();
+
+        if($time > $otp_code->valid_until)
+        {
+            return response()->json([
+                'code'      => '400',
+                'status'    => 'failed',
+                'message'   => 'OTP Code has Expired'
+            ]);
+        }
+
+        $user = User::find(auth()->user()->id);
+
+        $user->update(['email_verified_at' => Carbon::now()]);
+
+        $this->destroy($otp_code);
+
+        return response()->json([
+            'data'      => [
+                                'user' => new UserResource($user),
+                            ],
+            'code'      => '200',
+            'status'    => 'success',
+            'message'   => 'Success Verification Code'
+        ]);
+
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreOtpCodeRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreOtpCodeRequest $request)
+    public function destroy(OtpCode $otp_code)
     {
-        //
+        $otp_code->delete();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OtpCode  $otpCode
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OtpCode $otpCode)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OtpCode  $otpCode
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OtpCode $otpCode)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateOtpCodeRequest  $request
-     * @param  \App\Models\OtpCode  $otpCode
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateOtpCodeRequest $request, OtpCode $otpCode)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\OtpCode  $otpCode
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(OtpCode $otpCode)
-    {
-        //
-    }
+    
 }

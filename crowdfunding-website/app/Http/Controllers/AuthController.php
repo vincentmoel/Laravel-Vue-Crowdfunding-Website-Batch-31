@@ -18,6 +18,7 @@ class AuthController extends Controller
         {
             return response()->json([
                 'code'      => '401',
+                'status'    => 'failed',
                 'message'   => 'Unauthorized'
             ],401) ;
         }
@@ -26,10 +27,13 @@ class AuthController extends Controller
         $user = User::where('username',$request->username)->first();
 
         return response()->json([
-            'data'      => new UserResource($user),
-            'token'     => $token,
-            'code'      => '00',
-            'message'   => 'success'
+            'data'      => [
+                                'user' => new UserResource($user),
+                                'token' => $token
+                            ],
+            'code'      => '200',
+            'status'    => 'success',
+            'message'   => 'Success Login'
         ]);
     }
 
@@ -37,13 +41,10 @@ class AuthController extends Controller
     {
         auth()->logout();
         return response()->json([
-            'code'      => '00',
-            'message'   => 'success'
+            'code'      => '200',
+            'status'    => 'success',
+            'message'   => 'Success Logout'
         ]);
     }
 
-    public function tes()
-    {
-        return auth()->user()->name;
-    }
 }

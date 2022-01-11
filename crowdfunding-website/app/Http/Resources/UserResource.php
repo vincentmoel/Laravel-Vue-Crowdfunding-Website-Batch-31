@@ -20,12 +20,5 @@ class UserResource extends JsonResource
             'username'  => $this->username
         ];
     }
-
-    public function with($request)
-    {
-        return [
-            'code'      => '00',
-            'message'   => 'success'
-        ];
-    }
+    
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OtpCodeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,7 @@ Route::post('/register',[UserController::class,'store']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthController::class,'logout']);
 
-Route::get('/users',[AuthController::class,'tes']);
+Route::post('/regenerate-otp',[OtpCodeController::class,'update']);
+Route::post('/verification-otp',[OtpCodeController::class,'verification']);
+
+Route::post('/update-password',[UserController::class,'updatePassword']);
