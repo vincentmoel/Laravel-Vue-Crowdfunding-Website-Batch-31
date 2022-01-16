@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <ul id="app">
+        <div v-if="!isEdit">
+
+            <input v-model:value="name">
+            <button type="submit" @click="store()">Add</button>
+
+        </div>
+
+        <div v-if="isEdit">
+
+            <input v-model:value="name">
+            <button type="submit" @click="update()">Update</button>
+
+        </div>
+
+
+        <hr>
+        
+        <li v-for="(user , index) in users" :key="user.name">
+            {{ user.name }} - 
+            <button @click="edit(index,user.name)">Edit</button> || <button @click="destroy(index)">Delete</button>
+        </li>
+    </ul>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+   var vm = new Vue({
+      el: '#app',
+      data: {
+        isEdit : false,
+        name : "",
+        currentIndex : null,
+        users : [
+            {
+                'name' : "Muhammad Iqbal"
+            },
+            {
+                'name' : "Vincent Nathaniel"
+            },
+            {
+                'name' : "Agusta"
+            }
+        ]
+      },
+      methods : {
+            store : function(){
+                this.users.push({'name' : this.name})
+                this.name = ""
+            },
+
+            edit : function(index,nameValue){
+                this.isEdit = true
+                this.currentIndex = index
+                this.name = nameValue
+            },
+
+            update : function(){
+                this.$set(this.users, this.currentIndex , { name: this.name })
+                this.isEdit = false
+                this.name = ""
+            },
+
+            destroy : function(index){
+                this.users.splice(index, 1);
+            }
+      }
+  })
+  </script>
+</body>
+</html>
