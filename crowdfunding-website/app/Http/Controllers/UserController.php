@@ -28,7 +28,7 @@ class UserController extends Controller
         
         $user = User::create($get_request);
 
-        event(new OtpCodeEvent($user,$user->otp_code));
+        event(new OtpCodeEvent($user,'register'));
 
         return response()->json([
             'data'      => [

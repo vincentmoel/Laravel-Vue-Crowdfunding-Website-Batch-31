@@ -18,7 +18,7 @@ class OtpCodeController extends Controller
         $user = User::where('email',$request->email)->first();
         $user->generateOtpCode();
 
-        event(new OtpCodeEvent($user,$user->otp_code));
+        event(new OtpCodeEvent($user,'regenerate'));
 
 
         return response()->json([

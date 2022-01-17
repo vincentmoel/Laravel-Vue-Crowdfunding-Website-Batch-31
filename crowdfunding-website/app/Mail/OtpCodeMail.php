@@ -18,10 +18,11 @@ class OtpCodeMail extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, OtpCode $otp_code)
+    public function __construct(User $user, $message)
     {
         $this->user     = $user;
-        $this->otp_code = $otp_code;
+        $this->message  = $message;
+        
     }
 
     /**
@@ -34,7 +35,7 @@ class OtpCodeMail extends Mailable
         return $this->from('vincent@gmail.com')
                     ->view('otp_code_mail',[
                         'user'      => $this->user,
-                        'otp_code'  => $this->otp_code
+                        'messages'  => $this->message
                     ]);
     }
 }

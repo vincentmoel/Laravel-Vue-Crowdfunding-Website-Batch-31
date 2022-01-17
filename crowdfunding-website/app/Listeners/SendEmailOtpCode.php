@@ -15,6 +15,7 @@ class SendEmailOtpCode implements ShouldQueue
      *
      * @return void
      */
+    
     public function __construct()
     {
         //
@@ -28,6 +29,14 @@ class SendEmailOtpCode implements ShouldQueue
      */
     public function handle(OtpCodeEvent $event)
     {
-        Mail::to($event->user)->send(new OtpCodeMail($event->user,$event->otp_code));
+        if($event->condition == 'register')
+        {
+            $message = "Register berhasil";
+        }
+        else if ($event->condition == 'regenerate')
+        {
+            $message = "Regenerate berhasil";
+        }
+        Mail::to($event->user)->send(new OtpCodeMail($event->user , $message));
     }
 }

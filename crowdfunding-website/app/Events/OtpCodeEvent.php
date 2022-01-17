@@ -21,10 +21,11 @@ class OtpCodeEvent
      *
      * @return void
      */
-    public function __construct(User $user, OtpCode $otp_code)
+    public $user, $condition;
+    public function __construct(User $user, $condition)
     {
-        $this->user     = $user;
-        $this->otp_code = $otp_code;
+        $this->user      = $user;
+        $this->condition = $condition;
     }
 
     /**
