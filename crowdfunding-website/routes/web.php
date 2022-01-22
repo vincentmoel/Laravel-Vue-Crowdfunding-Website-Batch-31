@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('app');
 });
 
 Route::get('/route1',[UserController::class,'index'])->middleware('verified.email');
 Route::get('/route2',[UserController::class,'index2'])->middleware('admin.role');
+
