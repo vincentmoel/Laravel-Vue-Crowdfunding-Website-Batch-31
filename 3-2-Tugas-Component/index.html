@@ -48,30 +48,30 @@
     </div>
 
  
+    <template id="UsersComponent">
+        <div class="usersList">
+
+            <ul>
+
+                <li v-for="(user , index) in users" :key="index">
+
+                    {{ user.name }} ||
+
+                    <button @click="$emit('update',index)">Edit</button>
+
+                    <button @click="$emit('delete',index)">Delete</button>
+
+                </li>
+
+            </ul>
+
+        </div>
+    </template>
 
     <script>
 
         var UsersComponent = {
-            template : `
-            <div class="usersList">
-
-                <ul>
-
-                    <li v-for="(user , index) in users" :key="index">
-
-                        {{ user.name }} ||
-
-                        <button @click="$emit('update',index)">Edit</button>
-
-                        <button @click="$emit('delete',index)">Delete</button>
-
-                    </li>
-
-                </ul>
-
-            </div>
-            
-            `,
+            template : '#UsersComponent',
             props : ['users']
         }
 
