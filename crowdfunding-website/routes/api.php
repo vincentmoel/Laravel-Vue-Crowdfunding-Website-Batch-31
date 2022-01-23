@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\OtpCodeController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OtpCodeController;
+use App\Http\Controllers\CampaignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +31,20 @@ Route::post('/regenerate-otp',[OtpCodeController::class,'update']);
 Route::post('/verification-otp',[OtpCodeController::class,'verification']);
 
 Route::post('/update-password',[UserController::class,'updatePassword']);
+
+
+
+
+Route::group(['middleware' => 'api', 'prefix' => 'campaign'], function(){
+
+    Route::get('random/{count}', [CampaignController::class,'random']);
+    Route::get('store', [CampaignController::class,'store']);
+    Route::get('/', [CampaignController::class,'index']);
+});
+
+
+Route::group(['middleware' => 'api', 'prefix' => 'blog'], function(){
+
+    Route::get('random/{count}', [BlogController::class,'random']);
+    Route::get('store', [BlogController::class,'store']);
+});
