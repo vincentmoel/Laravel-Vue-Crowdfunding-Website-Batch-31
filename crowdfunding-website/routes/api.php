@@ -40,6 +40,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'campaign'], function(){
     Route::get('random/{count}', [CampaignController::class,'random']);
     Route::get('store', [CampaignController::class,'store']);
     Route::get('/', [CampaignController::class,'index']);
+    Route::get('/{id}',[CampaignController::class,'show']);
 });
 
 

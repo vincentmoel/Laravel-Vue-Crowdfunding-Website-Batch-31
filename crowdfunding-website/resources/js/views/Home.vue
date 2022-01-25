@@ -9,8 +9,8 @@
                 </v-btn>
             </div>
             <v-layout wrap>
-                <v-flex v-for="campaign in campaigns" :key="`campaign-` + campaign.id" xs6>
-                    <v-card :to="'/category/' + campaign.id">
+                <v-flex v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id" xs6>
+                    <!-- <v-card :to="'/category/' + campaign.id">
                         <v-img
                             :src="campaign.image"
                             class="white--text"
@@ -22,7 +22,8 @@
                             </v-card-title>
 
                         </v-img>
-                    </v-card>
+                    </v-card> -->
+                    <campaign-item :campaign="campaign"/>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -65,6 +66,9 @@
             campaigns:[],
             blogs:[],
         }),
+        components:{
+            CampaignItem: () => import('../components/CampaignItem')
+        },
         created(){
             axios.get('api/campaign/random/2')
                 .then((response) => {

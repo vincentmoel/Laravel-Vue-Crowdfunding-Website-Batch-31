@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlogsTable extends Migration
+class AddFieldToCampaignsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('title');
-            $table->text('description');
-            $table->string('image')->nullable();
-            $table->timestamps();
+        Schema::table('campaigns', function (Blueprint $table) {
+            $table->string('address')->nullable();
+            $table->integer('required')->nullable();
+            $table->integer('collected')->nullable();
+
         });
     }
 
@@ -29,6 +28,8 @@ class CreateBlogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogs');
+        Schema::table('campaigns', function (Blueprint $table) {
+            //
+        });
     }
 }

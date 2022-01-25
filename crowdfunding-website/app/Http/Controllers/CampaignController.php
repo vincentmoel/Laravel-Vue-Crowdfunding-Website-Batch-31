@@ -81,4 +81,18 @@ class CampaignController extends Controller
             'data'      => $data
         ]);
     }
+
+
+    public function show($id)
+    {
+        $campaign = Campaign::find($id);
+        $data['campaign'] = $campaign;
+
+        return response()->json([
+            'code'      => '200',
+            'status'    => 'success',
+            'message'   => 'Success',
+            'data'      => $data
+        ]);
+    }
 }

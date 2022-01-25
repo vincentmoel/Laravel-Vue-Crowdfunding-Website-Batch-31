@@ -2180,6 +2180,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'App',
   data: function data() {
@@ -2196,6 +2214,11 @@ __webpack_require__.r(__webpack_exports__);
       }],
       guest: false
     };
+  },
+  computed: {
+    isHome: function isHome() {
+      return this.$route.path === '/' || this.$route.path === '/home';
+    }
   }
 });
 
@@ -2326,6 +2349,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'campaigns',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_views_Campaigns_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Campaigns.vue */ "./resources/js/views/Campaigns.vue"));
+    }
+  }, {
+    path: '/campaign/:id',
+    name: 'campaign',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_views_Campaign_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
     path: '*',
@@ -3188,63 +3217,117 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-app-bar",
-        { attrs: { app: "", color: "success", dark: "" } },
-        [
-          _c("v-app-bar-nav-icon", {
-            on: {
-              click: function ($event) {
-                $event.stopPropagation()
-                _vm.drawer = !_vm.drawer
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v("Sanbercode App")]),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
+      _vm.isHome
+        ? _c(
+            "v-app-bar",
+            { attrs: { app: "", color: "success", dark: "" } },
+            [
+              _c("v-app-bar-nav-icon", {
+                on: {
+                  click: function ($event) {
+                    $event.stopPropagation()
+                    _vm.drawer = !_vm.drawer
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("v-toolbar-title", [_vm._v("Sanbercode App")]),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { icon: "" } },
+                [
+                  _c(
+                    "v-badge",
+                    {
+                      attrs: { color: "orange", overlap: "" },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "badge",
+                            fn: function () {
+                              return [_c("span", [_vm._v("3")])]
+                            },
+                            proxy: true,
+                          },
+                        ],
+                        null,
+                        false,
+                        3881307536
+                      ),
+                    },
+                    [_vm._v(" "), _c("v-icon", [_vm._v("mdi-cash-multiple")])],
+                    1
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  slot: "extension",
+                  "hide-details": "",
+                  "append-icon": "mdi-microphone",
+                  flat: "",
+                  label: "Search",
+                  "prepend-inner-icon": "mdi-magnify",
+                  "solo-inverted": "",
+                },
+                slot: "extension",
+              }),
+            ],
+            1
+          )
+        : _c(
+            "v-app-bar",
+            { attrs: { app: "", color: "success", dark: "" } },
             [
               _c(
-                "v-badge",
+                "v-btn",
                 {
-                  attrs: { color: "orange", overlap: "" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "badge",
-                      fn: function () {
-                        return [_c("span", [_vm._v("3")])]
-                      },
-                      proxy: true,
+                  attrs: { icon: "" },
+                  on: {
+                    click: function ($event) {
+                      $event.stopPropagation()
+                      return _vm.$router.go(-1)
                     },
-                  ]),
+                  },
                 },
-                [_vm._v(" "), _c("v-icon", [_vm._v("mdi-cash-multiple")])],
+                [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { icon: "" } },
+                [
+                  _c(
+                    "v-badge",
+                    {
+                      attrs: { color: "orange", overlap: "" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "badge",
+                          fn: function () {
+                            return [_c("span", [_vm._v("3")])]
+                          },
+                          proxy: true,
+                        },
+                      ]),
+                    },
+                    [_vm._v(" "), _c("v-icon", [_vm._v("mdi-cash-multiple")])],
+                    1
+                  ),
+                ],
                 1
               ),
             ],
             1
           ),
-          _vm._v(" "),
-          _c("v-text-field", {
-            attrs: {
-              slot: "extension",
-              "hide-details": "",
-              "append-icon": "mdi-microphone",
-              flat: "",
-              label: "Search",
-              "prepend-inner-icon": "mdi-magnify",
-              "solo-inverted": "",
-            },
-            slot: "extension",
-          }),
-        ],
-        1
-      ),
       _vm._v(" "),
       _c(
         "v-main",
@@ -65007,7 +65090,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_Home_vue":1,"resources_js_views_Donations_vue":1,"resources_js_views_Campaigns_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_Home_vue":1,"resources_js_views_Donations_vue":1,"resources_js_views_Campaigns_vue":1,"resources_js_views_Campaign_vue":1,"resources_js_components_CampaignItem_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

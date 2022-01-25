@@ -72,12 +72,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       campaigns: [],
       blogs: []
     };
+  },
+  components: {
+    CampaignItem: function CampaignItem() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_CampaignItem_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/CampaignItem */ "./resources/js/components/CampaignItem.vue"));
+    }
   },
   created: function created() {
     var _this = this;
@@ -215,33 +221,11 @@ var render = function () {
           _c(
             "v-layout",
             { attrs: { wrap: "" } },
-            _vm._l(_vm.campaigns, function (campaign) {
+            _vm._l(_vm.campaigns, function (campaign, index) {
               return _c(
                 "v-flex",
                 { key: "campaign-" + campaign.id, attrs: { xs6: "" } },
-                [
-                  _c(
-                    "v-card",
-                    { attrs: { to: "/category/" + campaign.id } },
-                    [
-                      _c(
-                        "v-img",
-                        {
-                          staticClass: "white--text",
-                          attrs: { src: campaign.image },
-                        },
-                        [
-                          _c("v-card-title", {
-                            staticClass: "fill-height align-end",
-                            domProps: { textContent: _vm._s(campaign.title) },
-                          }),
-                        ],
-                        1
-                      ),
-                    ],
-                    1
-                  ),
-                ],
+                [_c("campaign-item", { attrs: { campaign: campaign } })],
                 1
               )
             }),
