@@ -1,6 +1,10 @@
 <template>
   <v-app>
 
+    <alert>
+
+    </alert>
+
     <!-- Sidebar -->
     <v-navigation-drawer app v-model="drawer">
       <v-list>
@@ -153,13 +157,17 @@
     import { mapGetters } from 'vuex'
     export default{
       name : 'App',
+      components : {
+        Alert : () => import('./components/Alert')
+      } ,
       data:()=>({
         drawer : true,
         menus : [
           { title:'Home', icon: 'mdi-home', route: '/' },
           { title:'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns' },
         ],
-        guest:false
+        guest:false,
+
       }),
       computed :{
         isHome() {
@@ -171,7 +179,8 @@
         // transaction(){
         //   return this.$store.getters.transaction
         // }
-      }
+      },
+      
     }
 
 </script>

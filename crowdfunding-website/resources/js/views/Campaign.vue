@@ -50,7 +50,7 @@
 
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
     export default{
         data :()=>({
             campaign:{},
@@ -74,8 +74,27 @@ import { mapMutations } from 'vuex'
             },
 
             ...mapMutations({
-                'donate' : 'transaction/insert'
+                tambahTransaksi : 'transaction/insert'
             }),
+
+            ...mapActions({
+                setAlert : 'alert/set'
+            }),
+
+            donate(){
+                this.tambahTransaksi()
+                this.setAlert({
+                    status : true,
+                    color : 'success',
+                    text : 'Transaksi ditambahkan'
+
+                })
+            }
+
+
+            // ...mapMutations({
+            //     'donate' : 'transaction/insert'
+            // }),
             // donate(){
             //     this.$store.commit('insert')
             // }
