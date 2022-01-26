@@ -64,12 +64,14 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-badge color="orange" overlap>
+        <v-badge color="orange" overlap v-if="transactions>0">
           <template v-slot:badge>
-            <span>3</span>
+            <span>{{ transactions }}</span>
           </template>
           <v-icon>mdi-cash-multiple</v-icon>
         </v-badge>
+        <v-icon v-else>mdi-cash-multiple</v-icon>
+
       </v-btn>
 
 
@@ -95,13 +97,27 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-badge color="orange" overlap>
+        <v-badge color="orange" overlap v-if="transactions>0">
           <template v-slot:badge>
-            <span>3</span>
+            <span>{{ transactions }}</span>
           </template>
           <v-icon>mdi-cash-multiple</v-icon>
         </v-badge>
+        <v-icon v-else>mdi-cash-multiple</v-icon>
+
       </v-btn>
+      
+      <v-text-field
+        slot="extension"
+        hide-details
+        append-icon="mdi-microphone"
+        flat
+        label="Search"
+        prepend-inner-icon="mdi-magnify"
+        solo-inverted
+      >
+
+      </v-text-field>
     </v-app-bar>
 
     <!-- Content -->
@@ -116,6 +132,8 @@
       
     </v-main>
 
+
+    <!-- Footer -->
     <v-card>
       <v-footer absolute app>
         <v-card-text class="text-center">
@@ -132,6 +150,7 @@
 
 
 <script>
+    import { mapGetters } from 'vuex'
     export default{
       name : 'App',
       data:()=>({
@@ -145,7 +164,13 @@
       computed :{
         isHome() {
           return (this.$route.path ==='/' || this.$route.path ==='/home')
-        }
+        },
+        ...mapGetters({
+          'transactions' : 'transaction/transactions'
+        }),
+        // transaction(){
+        //   return this.$store.getters.transaction
+        // }
       }
     }
 
