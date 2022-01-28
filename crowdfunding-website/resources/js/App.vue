@@ -1,9 +1,11 @@
 <template>
   <v-app>
 
-    <alert>
+    <alert></alert>
 
-    </alert>
+    <v-dialog v-model="dialog" fullscreen hide-overlay transition="scale-transition">
+      <search @closed="closeDialog"></search>
+    </v-dialog>
 
     <!-- Sidebar -->
     <v-navigation-drawer app v-model="drawer">
@@ -87,6 +89,8 @@
         label="Search"
         prepend-inner-icon="mdi-magnify"
         solo-inverted
+        @click="dialog = true"
+
       >
       </v-text-field>
       
@@ -119,6 +123,8 @@
         label="Search"
         prepend-inner-icon="mdi-magnify"
         solo-inverted
+         @click="dialog = true"
+
       >
 
       </v-text-field>
@@ -158,7 +164,8 @@
     export default{
       name : 'App',
       components : {
-        Alert : () => import('./components/Alert')
+        Alert : () => import('./components/Alert'),
+        Search : () => import('./components/Search')
       } ,
       data:()=>({
         drawer : true,
@@ -166,7 +173,7 @@
           { title:'Home', icon: 'mdi-home', route: '/' },
           { title:'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns' },
         ],
-        guest:false,
+        dialog:false
 
       }),
       computed :{
@@ -174,12 +181,19 @@
           return (this.$route.path ==='/' || this.$route.path ==='/home')
         },
         ...mapGetters({
-          'transactions' : 'transaction/transactions'
+          transactions : 'transaction/transactions',
+          guest : 'auth/guest',
+          user : 'auth/user'
         }),
         // transaction(){
         //   return this.$store.getters.transaction
         // }
       },
+      methods:{
+        closeDialog(value){
+          this.dialog = value
+        }
+      }
       
     }
 

@@ -41,6 +41,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'campaign'], function(){
     Route::get('store', [CampaignController::class,'store']);
     Route::get('/', [CampaignController::class,'index']);
     Route::get('/{id}',[CampaignController::class,'show']);
+    Route::get('/search/{keyword}',[CampaignController::class,'search']);
 });
 
 
