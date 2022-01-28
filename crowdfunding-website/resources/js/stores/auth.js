@@ -4,7 +4,7 @@ export default{
         user : {},
     },
     mutations : {
-        ser :(state,payload) => {
+        set :(state,payload) => {
             state.user = payload
         },
     },

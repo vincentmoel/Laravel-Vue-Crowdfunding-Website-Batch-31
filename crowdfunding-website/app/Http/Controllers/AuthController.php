@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only('username','password');
+        $credentials = $request->only('email','password');
 
         if(!$token = JWTAuth::attempt($credentials))
         {
@@ -24,11 +24,11 @@ class AuthController extends Controller
         }
         
 
-        $user = User::where('username',$request->username)->first();
+        $user = User::where('email',$request->email)->first();
 
         return response()->json([
             'data'      => [
-                                'users' => new UserResource($user),
+                                'user' => $user,
                                 'token' => $token
                             ],
             'code'      => '200',

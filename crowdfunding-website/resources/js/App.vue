@@ -3,9 +3,13 @@
 
     <alert></alert>
 
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="scale-transition">
-      <search @closed="closeDialog"></search>
-    </v-dialog>
+    <!-- 3 -->
+
+    <keep-alive>
+      <v-dialog v-model="dialog" fullscreen hide-overlay persistent transition="dialog-bottom-transition">
+        <component :is="currentComponent" @closed="setDialogStatus"></component>
+      </v-dialog>
+    </keep-alive>
 
     <!-- Sidebar -->
     <v-navigation-drawer app v-model="drawer">
@@ -20,7 +24,7 @@
         </v-list-item>
 
         <div class="pa-2" v-if="guest">
-          <v-btn block color="primary" class="mb-1">
+          <v-btn block color="primary" class="mb-1" @click="setDialogComponent('login')">
             <v-icon left>mdi-lock</v-icon>
             Login
           </v-btn>
@@ -89,7 +93,7 @@
         label="Search"
         prepend-inner-icon="mdi-magnify"
         solo-inverted
-        @click="dialog = true"
+        @click="setDialogComponent('search')"
 
       >
       </v-text-field>
@@ -160,12 +164,13 @@
 
 
 <script>
-    import { mapGetters } from 'vuex'
+    import { mapActions, mapGetters } from 'vuex'
     export default{
       name : 'App',
       components : {
         Alert : () => import('./components/Alert'),
-        Search : () => import('./components/Search')
+        Search : () => import('./components/Search'),
+        Login : () => import('./components/Login')
       } ,
       data:()=>({
         drawer : true,
@@ -173,7 +178,6 @@
           { title:'Home', icon: 'mdi-home', route: '/' },
           { title:'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns' },
         ],
-        dialog:false
 
       }),
       computed :{
@@ -183,16 +187,30 @@
         ...mapGetters({
           transactions : 'transaction/transactions',
           guest : 'auth/guest',
-          user : 'auth/user'
+          user : 'auth/user',
+          dialogStatus : 'dialog/status',
+          currentComponent : 'dialog/component'
         }),
+        dialog:{
+          get(){
+            return this.dialogStatus
+          },
+          set(value){
+            this.setDialogStatus(value)
+          }
+        }
         // transaction(){
         //   return this.$store.getters.transaction
         // }
       },
       methods:{
-        closeDialog(value){
-          this.dialog = value
-        }
+        // closeDialog(value){
+        //   this.dialog = value
+        // }
+        ...mapActions({
+          setDialogStatus : 'dialog/setStatus',
+          setDialogComponent : 'dialog/setComponent'
+        })
       }
       
     }
