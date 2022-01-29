@@ -55,9 +55,9 @@
 
       <template v-slot:append v-if="!guest">
         <div class="pa-2">
-          <v-btn block color="red" dark>
+          <v-btn block color="red" dark @click="logout">
             <v-icon left>mdi-lock</v-icon>
-            Logout
+              Logout
           </v-btn>
         </div>
       </template>
@@ -219,8 +219,24 @@
               'Authorization' : 'Bearer' + this.user.token,
             },
           }
-          axios.post('api/auth/logout',{},config)
-          .then
+          axios.post('api/logout',{},config)
+          .then((response) => {
+            this.setAuth({})
+            this.setAlert({
+              status : true,
+              color : 'success',
+              text : 'Logout success'
+            })
+
+          })
+          .catch((error) => {
+            let {data} = error.response
+            this.setAlert({
+              status : true,
+              color : 'error',
+              text : data.message
+            })
+          })
         }
       }
       

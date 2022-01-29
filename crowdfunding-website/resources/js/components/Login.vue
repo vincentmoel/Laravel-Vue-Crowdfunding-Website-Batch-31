@@ -106,10 +106,10 @@ export default {
                 })
                 .catch((error) => {
                     let responses = error.response
-
+                    console.log(responses);
                     this.setAlert({
                         status : true,
-                        text : responses.data.error,
+                        text : responses.data.message,
                         color : 'error'
                     })
                 })

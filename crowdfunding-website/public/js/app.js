@@ -2295,12 +2295,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setAlert: 'alert/set'
   })), {}, {
     logout: function logout() {
+      var _this = this;
+
       var config = {
         headers: {
           'Authorization': 'Bearer' + this.user.token
         }
       };
-      axios.post('api/auth/logout', {}, config).then;
+      axios.post('api/logout', {}, config).then(function (response) {
+        _this.setAuth({});
+
+        _this.setAlert({
+          status: true,
+          color: 'success',
+          text: 'Logout success'
+        });
+      })["catch"](function (error) {
+        var data = error.response.data;
+
+        _this.setAlert({
+          status: true,
+          color: 'error',
+          text: data.message
+        });
+      });
     }
   })
 });
@@ -3408,12 +3426,15 @@ var render = function () {
                           [
                             _c(
                               "v-btn",
-                              { attrs: { block: "", color: "red", dark: "" } },
+                              {
+                                attrs: { block: "", color: "red", dark: "" },
+                                on: { click: _vm.logout },
+                              },
                               [
                                 _c("v-icon", { attrs: { left: "" } }, [
                                   _vm._v("mdi-lock"),
                                 ]),
-                                _vm._v("\n          Logout\n        "),
+                                _vm._v("\n            Logout\n        "),
                               ],
                               1
                             ),
