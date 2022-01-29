@@ -17,8 +17,7 @@ class CreateUsersTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('username')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('photo_profile');
             $table->timestamps();
 

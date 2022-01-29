@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OtpCodeController;
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,8 @@ Route::post('/verification-otp',[OtpCodeController::class,'verification']);
 
 Route::post('/update-password',[UserController::class,'updatePassword']);
 
-
+Route::get('/social/{provider}',[SocialiteController::class,'redirectToProvider']);
+Route::get('/social/{provider}/callback',[SocialiteController::class,'handleProviderCallback']);
 
 
 Route::group(['middleware' => 'api', 'prefix' => 'campaign'], function(){
