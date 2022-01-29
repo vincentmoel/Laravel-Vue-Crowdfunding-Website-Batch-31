@@ -211,7 +211,8 @@
           setDialogStatus : 'dialog/setStatus',
           setDialogComponent : 'dialog/setComponent',
           setAuth : 'auth/set',
-          setAlert : 'alert/set'
+          setAlert : 'alert/set',
+          checkToken : 'auth/checkToken'
         }),
         logout(){
           let config = {
@@ -237,6 +238,12 @@
               text : data.message
             })
           })
+        }
+      },
+
+      mounted(){
+        if(this.user){
+          this.checkToken(this.user)
         }
       }
       

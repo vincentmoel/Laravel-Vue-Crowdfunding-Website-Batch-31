@@ -46,4 +46,13 @@ class AuthController extends Controller
         ]);
     }
 
+    public function checkToken()
+    {
+        return response()->json([
+            'code'      => '200',
+            'status'    => 'success',
+            'message'   => 'Success Token',
+            'data'      => true
+        ]);
+    }
 }
