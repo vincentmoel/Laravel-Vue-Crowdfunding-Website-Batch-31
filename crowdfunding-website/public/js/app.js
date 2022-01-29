@@ -2288,12 +2288,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // }
 
   }),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
     setDialogStatus: 'dialog/setStatus',
     setDialogComponent: 'dialog/setComponent',
     setAuth: 'auth/set',
     setAlert: 'alert/set'
-  }))
+  })), {}, {
+    logout: function logout() {
+      var config = {
+        headers: {
+          'Authorization': 'Bearer' + this.user.token
+        }
+      };
+      axios.post('api/auth/logout', {}, config).then;
+    }
+  })
 });
 
 /***/ }),

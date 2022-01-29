@@ -212,7 +212,16 @@
           setDialogComponent : 'dialog/setComponent',
           setAuth : 'auth/set',
           setAlert : 'alert/set'
-        })
+        }),
+        logout(){
+          let config = {
+            headers : {
+              'Authorization' : 'Bearer' + this.user.token,
+            },
+          }
+          axios.post('api/auth/logout',{},config)
+          .then
+        }
       }
       
     }
