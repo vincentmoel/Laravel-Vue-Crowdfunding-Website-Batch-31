@@ -2290,7 +2290,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
     setDialogStatus: 'dialog/setStatus',
-    setDialogComponent: 'dialog/setComponent'
+    setDialogComponent: 'dialog/setComponent',
+    setAuth: 'auth/set',
+    setAlert: 'alert/set'
   }))
 });
 
@@ -3438,9 +3440,7 @@ var render = function () {
                         "v-list-item-avatar",
                         [
                           _c("v-img", {
-                            attrs: {
-                              src: "https://randomuser.me/api/portraits/men/78.jpg",
-                            },
+                            attrs: { src: _vm.user.user.photo_profile },
                           }),
                         ],
                         1
@@ -3448,7 +3448,11 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "v-list-item-content",
-                        [_c("v-list-item-title", [_vm._v(" John Leider ")])],
+                        [
+                          _c("v-list-item-title", [
+                            _vm._v(" " + _vm._s(_vm.user.user.name) + " "),
+                          ]),
+                        ],
                         1
                       ),
                     ],

@@ -72,7 +72,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       valid: true,
-      email: 'example@example.com',
+      email: 'vincent@gmail.com',
       emailRules: [function (v) {
         return !!v || 'Email is Required';
       }, function (v) {

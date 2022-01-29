@@ -54,7 +54,7 @@ export default {
     data(){
         return{
             valid : true,
-            email : 'example@example.com',
+            email : 'vincent@gmail.com',
             emailRules : [
                 v => !!v || 'Email is Required',
                 v => /([a-zA-Z0-9_]{1,})(@)([a-zA-Z0-9_]{2,}).([a-zA-Z0-9_]{2,})+/.test(v) || 'Email Must Be Valid' 
