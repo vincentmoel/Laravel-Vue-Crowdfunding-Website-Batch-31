@@ -29,6 +29,11 @@ const router = new Router({
             component:()=>import('./views/Campaign.vue')
         },
         {
+            path : '/social/:provider/callback',
+            name : 'social',
+            component:()=>import('./views/Social.vue')
+        },
+        {
             path : '*',
             redirect : '/',
         },

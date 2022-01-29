@@ -53,7 +53,7 @@
             }
         },
         methods : {
-            ...mapGetters({
+            ...mapActions({
                 setAlert : 'alert/set'
             }),
             close(){
